@@ -29,16 +29,16 @@ const App: () => React$Node = () => {
 
         <View style={styles.container}>
           <TouchableHighlight style={styles.high}
-            onPress={() => module.Sample.read( "read")}>
+            onPress={() => module.Sample.readString( "read")}>
 
             <View style={styles.btn}>
-              <Text>{"read"}</Text>
+              <Text>{"readString"}</Text>
             </View>
           
           </TouchableHighlight>
             
           <TouchableHighlight style={styles.high}
-            onPress={() => module.Sample.callback({ name: "callback" }).then(msg => { 
+            onPress={() => module.Sample.promiseTest({ name: "callback" }).then(msg => { 
               Toast.show(msg,Toast.SHORT)
             })}>
 
@@ -49,7 +49,7 @@ const App: () => React$Node = () => {
           </TouchableHighlight>
 
            <TouchableHighlight style={styles.high}
-            onPress={() => module.Sample.callbackArray(array).then(msg => { 
+            onPress={() => module.Sample.promiseArray(array).then(msg => { 
               Toast.show(msg,Toast.SHORT)
             })}>
 
@@ -58,6 +58,29 @@ const App: () => React$Node = () => {
             </View>
           
           </TouchableHighlight>
+
+
+          <TouchableHighlight style={styles.high}
+            onPress={() => module.Sample.callBackArray(array, (msg) => { 
+              Toast.show(msg,Toast.SHORT)
+            })}>
+
+            <View style={styles.btn}>
+              <Text>{"callbackArray"}</Text>
+            </View>
+          
+          </TouchableHighlight>
+
+          <TouchableHighlight style={styles.high}
+            onPress={() => module.Sample.callbackTest({ name: "callback" }, (msg) => { 
+              Toast.show(msg,Toast.SHORT)
+            })}>
+
+            <View style={styles.btn}>
+              <Text>{"callbackTest"}</Text>
+            </View>
+          
+          </TouchableHighlight>          
 
         </View>          
 
