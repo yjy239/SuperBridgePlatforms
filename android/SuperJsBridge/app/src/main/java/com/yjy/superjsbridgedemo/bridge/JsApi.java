@@ -1,4 +1,4 @@
-package com.yjy.superjsbridgedemo;
+package com.yjy.superjsbridgedemo.bridge;
 
 import android.os.CountDownTimer;
 import android.util.Log;

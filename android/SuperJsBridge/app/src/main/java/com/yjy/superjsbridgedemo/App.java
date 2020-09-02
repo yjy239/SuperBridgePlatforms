@@ -16,6 +16,8 @@ import com.yjy.superjsbridgedemo.rn.SamplePackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import io.flutter.view.FlutterMain;
+
 /**
  * <pre>
  *     author : yjy
@@ -58,6 +60,7 @@ public class App extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        FlutterMain.startInitialization(this);
         SoLoader.init(this, /* native exopackage */ false);
         initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
         Log.e("dir", Environment.getDataDirectory().getAbsolutePath());

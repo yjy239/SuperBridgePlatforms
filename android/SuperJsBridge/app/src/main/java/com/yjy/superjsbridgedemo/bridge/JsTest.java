@@ -1,4 +1,4 @@
-package com.yjy.superjsbridgedemo;
+package com.yjy.superjsbridgedemo.bridge;
 
 import android.net.Uri;
 import android.util.Log;
