@@ -1,0 +1,4 @@
+include ':app', ':superbridge', ':aspectjhelper'
+include ':dsbridge'
+include ':converter'
+include ':rnbridge'
