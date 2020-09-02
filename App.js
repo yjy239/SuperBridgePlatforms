@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { FC } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,7 +9,7 @@ import {
   Button,
   TouchableHighlight,
   ToastAndroid as Toast,
-  NativeModules as module
+  NativeModules as module,
 } from 'react-native';
 
 import {
@@ -20,8 +20,53 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import BatchedBridge from 'react-native/Libraries/BatchedBridge/BatchedBridge'
+
+const RouterButton = (props) => { 
+  return (
+    <View>
+          <TouchableHighlight style={styles.high}
+            onPress={() => props.func()}>
+
+            <View style={styles.btn}>
+              <Text>{props.name}</Text>
+            </View>
+          
+            
+          </TouchableHighlight>   
+
+  </View>);
+}
+
+function router1() {
+  module.default.registerTest("data", (msg) => {
+    Toast.show(msg, Toast.SHORT)
+  })
+
+}
+
+function router2() {
+  module.default.calHandlerTest("data", (msg) => {
+    //Toast.show(msg, Toast.SHORT)
+  })
+
+}
+
+
+const JSModule = {
+  callHandler(msg) { 
+    Toast.show(msg, Toast.SHORT)
+  }
+}
+
+
 const App: () => React$Node = () => {
-  const array = [{uri:"www.baidu.com"},{uri:"www.baidu.com"}];
+
+
+  BatchedBridge.registerCallableModule('JSModule',JSModule);
+  
+  const array = [{ uri: "www.baidu.com" }, { uri: "www.baidu.com" }];
+  
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -41,6 +86,8 @@ const App: () => React$Node = () => {
             onPress={() => module.Sample.promiseTest({ name: "callback" }).then(msg => { 
               Toast.show(msg,Toast.SHORT)
             })}>
+
+            
 
             <View style={styles.btn}>
               <Text>{"callback"}</Text>
@@ -80,7 +127,20 @@ const App: () => React$Node = () => {
               <Text>{"callbackTest"}</Text>
             </View>
           
-          </TouchableHighlight>          
+            
+          </TouchableHighlight> 
+          
+          <RouterButton
+            name="registerTest"
+            func={router1} >
+
+          </RouterButton>
+
+          <RouterButton
+            name="calHandlerTest"
+            func={router2} >
+
+          </RouterButton>
 
         </View>          
 
