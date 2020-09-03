@@ -286,6 +286,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter beginArray() throws IOException {
+        if(factory!=null){
+            factory.arrayBegin(deferredName);
+        }
         writeDeferredName();
         return open(EMPTY_ARRAY, '[');
     }
@@ -296,6 +299,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter endArray() throws IOException {
+        if(factory!=null){
+            factory.arrayEnd();
+        }
         return close(EMPTY_ARRAY, NONEMPTY_ARRAY, ']');
     }
 
@@ -306,6 +312,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter beginObject() throws IOException {
+        if(factory!=null){
+            factory.objectBegin(deferredName);
+        }
         writeDeferredName();
         return open(EMPTY_OBJECT, '{');
     }
@@ -316,6 +325,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter endObject() throws IOException {
+        if(factory!=null){
+            factory.objectEnd();
+        }
         return close(EMPTY_OBJECT, NONEMPTY_OBJECT, '}');
     }
 
@@ -411,6 +423,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter value(String value) throws IOException {
+        if(factory!=null){
+            factory.walk(deferredName,value);
+        }
         if (value == null) {
             return nullValue();
         }
@@ -428,6 +443,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter jsonValue(String value) throws IOException {
+        if(factory!=null){
+            factory.walk(deferredName,value);
+        }
         if (value == null) {
             return nullValue();
         }
@@ -462,6 +480,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter value(boolean value) throws IOException {
+        if(factory!=null){
+            factory.walk(deferredName,value);
+        }
         writeDeferredName();
         beforeValue();
         out.write(value ? "true" : "false");
@@ -474,6 +495,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter value(Boolean value) throws IOException {
+        if(factory!=null){
+            factory.walk(deferredName,value);
+        }
         if (value == null) {
             return nullValue();
         }
@@ -491,6 +515,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter value(double value) throws IOException {
+        if(factory!=null){
+            factory.walk(deferredName,value);
+        }
         writeDeferredName();
         if (!lenient() && (Double.isNaN(value) || Double.isInfinite(value))) {
             throw new IllegalArgumentException("Numeric values must be finite, but was " + value);
@@ -506,6 +533,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter value(long value) throws IOException {
+        if(factory!=null){
+            factory.walk(deferredName,value);
+        }
         writeDeferredName();
         beforeValue();
         out.write(Long.toString(value));
@@ -520,6 +550,9 @@ public class WalkerJsonWriter extends JsonWriter {
      * @return this writer.
      */
     public JsonWriter value(Number value) throws IOException {
+        if(factory!=null){
+            factory.walk(deferredName,value);
+        }
         if (value == null) {
             return nullValue();
         }

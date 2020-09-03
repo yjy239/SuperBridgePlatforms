@@ -9,8 +9,12 @@ package com.yjy.superbridge.internal.convert;
  *     version: 1.0
  * </pre>
  */
-public interface ChildConvertFactory<T,F> {
+public interface ChildConvertFactory {
+    void objectBegin(String name);
     void walk(String key,Object value);
+    void objectEnd();
+    void arrayBegin(String name);
+    void arrayEnd();
 
 
 }

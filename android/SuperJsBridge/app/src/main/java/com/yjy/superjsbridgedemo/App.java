@@ -40,7 +40,7 @@ public class App extends Application implements ReactApplication {
                 protected List<ReactPackage> getPackages() {
                     List<ReactPackage> packages = new PackageList(this).getPackages();
                     // Packages that cannot be autolinked yet can be added manually here, for example:
-                     //packages.add(new SamplePackage());
+//                     packages.add(new SamplePackage());
                     return packages;
                 }
 

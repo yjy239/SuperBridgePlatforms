@@ -1,5 +1,7 @@
 package com.yjy.rnbridge.RnCompent.core;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.facebook.debug.holder.PrinterHolder;
@@ -27,6 +29,7 @@ import com.yjy.rnbridge.RnBridge.PromiseCallback;
 import com.yjy.rnbridge.RnBridge.TransformObject;
 import com.yjy.superbridge.internal.CallBackHandler;
 import com.yjy.superbridge.internal.Utils.$Types$;
+import com.yjy.superbridge.internal.convert.ChildConvertFactory;
 import com.yjy.superbridge.internal.convert.ConvertFactory;
 import com.yjy.superbridge.jsbridge.CallBackFunction;
 
@@ -187,10 +190,10 @@ public class BridgeMethodWrapper implements NativeModule.NativeMethod {
                 @Override
                 public PromiseCallback extractArgument(
                         JSInstance jsInstance, ReadableArray jsArguments, int atIndex, ConvertFactory factory) {
-                    Callback resolve =
-                            ARGUMENT_EXTRACTOR_CALLBACK.extractArgument(jsInstance, jsArguments, atIndex,factory );
-                    Callback reject =
-                            ARGUMENT_EXTRACTOR_CALLBACK.extractArgument(jsInstance, jsArguments, atIndex + 1,factory );
+                    CallBackHandler resolve =
+                            ARGUMENT_EXTRACTOR_COMPLETE_CALLBACK.extractArgument(jsInstance, jsArguments, atIndex,factory );
+                    CallBackHandler reject =
+                            ARGUMENT_EXTRACTOR_COMPLETE_CALLBACK.extractArgument(jsInstance, jsArguments, atIndex + 1,factory );
                     return new BridgePromiseCallback(resolve, reject);
                 }
             };
@@ -297,6 +300,7 @@ public class BridgeMethodWrapper implements NativeModule.NativeMethod {
     private @Nullable int mJSArgumentsNeeded;
     private Object mRealActionObject;
     private ConvertFactory mFactory;
+    private static final String TAG = BridgeMethodWrapper.class.getSimpleName();
 
     public BridgeMethodWrapper(JavaModuleWrapper module, Method method, boolean isSync, Object obj,
                                ConvertFactory factory) {
@@ -446,7 +450,7 @@ public class BridgeMethodWrapper implements NativeModule.NativeMethod {
                             args = args.replace("NativeMap","\"NativeMap\"");
                             if(mFactory != null){
                                 try{
-                                    object = (TransformObject)mFactory.createConverter(type,null).convert(args);
+                                    object = (TransformObject)mFactory.createConverter(type, null).convert(args);
                                 }catch (Exception e){
                                     e.printStackTrace();
                                 }

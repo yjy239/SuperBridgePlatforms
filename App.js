@@ -52,6 +52,11 @@ function router2() {
 
 }
 
+function routerReturn() {
+  let user = module.Sample.returnTest("name")
+  Toast.show(user, Toast.SHORT)
+}
+
 
 const JSModule = {
   callHandler(msg) { 
@@ -90,7 +95,7 @@ const App: () => React$Node = () => {
             
 
             <View style={styles.btn}>
-              <Text>{"callback"}</Text>
+              <Text>{"promiseTest"}</Text>
             </View>
           
           </TouchableHighlight>
@@ -98,10 +103,12 @@ const App: () => React$Node = () => {
            <TouchableHighlight style={styles.high}
             onPress={() => module.Sample.promiseArray(array).then(msg => { 
               Toast.show(msg,Toast.SHORT)
+            }).catch(error => { 
+              Toast.show(error.message,Toast.SHORT)
             })}>
 
             <View style={styles.btn}>
-              <Text>{"callbackArray"}</Text>
+              <Text>{"promiseArray"}</Text>
             </View>
           
           </TouchableHighlight>
@@ -119,8 +126,8 @@ const App: () => React$Node = () => {
           </TouchableHighlight>
 
           <TouchableHighlight style={styles.high}
-            onPress={() => module.Sample.callbackTest({ name: "callback" }, (msg) => { 
-              Toast.show(msg,Toast.SHORT)
+            onPress={() => module.Sample.callbackTest({ name: "callback", uri: array, love: {interest:"aaa"}}, (msg) => { 
+              Toast.show(msg.love.interest,Toast.SHORT)
             })}>
 
             <View style={styles.btn}>
@@ -139,6 +146,12 @@ const App: () => React$Node = () => {
           <RouterButton
             name="calHandlerTest"
             func={router2} >
+
+          </RouterButton>
+
+          <RouterButton
+            name="returnTest"
+            func={routerReturn} >
 
           </RouterButton>
 

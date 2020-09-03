@@ -1,11 +1,17 @@
 package com.yjy.rnbridge.RnBridge;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.facebook.react.bridge.JSInstance;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.yjy.superbridge.internal.CallBackHandler;
 import com.yjy.superbridge.internal.convert.ChildConvertFactory;
 import com.yjy.superbridge.internal.convert.ConvertFactory;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * <pre>
@@ -21,12 +27,15 @@ public class BridgeCallbackImpl implements CallBackHandler {
     private final int mCallbackId;
     private boolean mInvoked;
     private ConvertFactory mFactory;
+    private Transformer transformer;
 
+    private static final String TAG = BridgeCallbackImpl.class.getSimpleName();
     public BridgeCallbackImpl(JSInstance jsInstance, int callbackId, ConvertFactory factory) {
         mJSInstance = jsInstance;
         mCallbackId = callbackId;
         mInvoked = false;
         mFactory = factory;
+        transformer = new Transformer();
     }
 
     @Override
@@ -40,7 +49,6 @@ public class BridgeCallbackImpl implements CallBackHandler {
         mJSInstance.invokeCallback(mCallbackId, fromJavaArgs(new Object[]{data}));
         mInvoked = true;
     }
-
 
     public WritableNativeArray fromJavaArgs(Object[] args) {
         WritableNativeArray arguments = new WritableNativeArray();
@@ -66,9 +74,23 @@ public class BridgeCallbackImpl implements CallBackHandler {
                 arguments.pushMap((WritableNativeMap) argument);
             } else if (argumentClass == WritableNativeArray.class) {
                 arguments.pushArray((WritableNativeArray) argument);
+            }else if(mFactory!=null&&
+                    (Collection.class.isAssignableFrom(argumentClass)||argumentClass.isArray())){
+                try {
+                    mFactory.createConverter(argument.getClass(),transformer).toConvert(argument);
+                    WritableNativeArray array = (WritableNativeArray)transformer.getResult();
+                    Log.e("result",array!=null?array.toString():null);
+                    arguments.pushArray(array);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }else if(mFactory!=null){
                 try {
-                    mFactory.createConverter(argument.getClass(), null).toConvert(argument);
+                    mFactory.createConverter(argument.getClass(),transformer).toConvert(argument);
+                    WritableNativeMap map = (WritableNativeMap)transformer.getResult();
+                    Log.e("result",map!=null?map.toString():null);
+                    arguments.pushMap(map);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -89,4 +111,5 @@ public class BridgeCallbackImpl implements CallBackHandler {
     public void setProgressData(Object value) {
 
     }
+
 }
