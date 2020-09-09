@@ -1,13 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
+
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Bridge Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
         // counter didn't reset back to zero; the application is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Bridge Home Page'),
     );
   }
 }
@@ -42,18 +46,98 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class User{
+  String name;
+  int age;
+}
 
-  void _incrementCounter() {
+class _MyHomePageState extends State<MyHomePage> {
+  String response = "";
+  int index = 0;
+
+  static const sample =
+  const MethodChannel("Sample");
+
+  void router1() {
+    index++;
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      response = index.toString();
     });
+  }
+
+  void readString()  {
+    sample.invokeMethod("readString","test")
+    .then((value) => {
+      setState(() {
+        if(value == null){
+          response = "is null";
+        }else{
+          response = "ok";
+        }
+      })
+    });
+
+  }
+
+  void callbackTest(){
+    User user = User();
+    user.name = "Tome";
+    user.age = 11;
+    var array = ["{ \"uri\": \"www.baidu.com\" }", "{ \"uri\": \"www.baidu.com\" }"];
+    sample.invokeMethod("callbackTest","{\"name\": \"callback\",\"uri\": [{\"uri\": \"www.baidu.com \"}, {\"uri\": \"www.baidu.com\"}],\"love\": {\"interest\": \"aaa\"}}")
+        .then((value) => {
+      setState(() {
+        response = value;
+      })
+    });
+  }
+
+  void callBackArray()  {
+    var arr1 = ["{ \"uri\": \"www.baidu.com\" }", "{ \"uri\": \"www.baidu.com\" }"];
+    sample.invokeMethod("callBackArray",arr1)
+        .then((value) => {
+      setState(() {
+        response = value==null?"null":value;
+      })
+    });
+
+  }
+
+  void showToast(String value)  {
+    sample.invokeMethod("showToast",value);
+  }
+
+  Widget routerButton(String name,Function press){
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Center(
+        child:CupertinoButton(
+          child: Text(name),
+          onPressed: press,
+          color: Color.fromARGB(255, 0, 0, 255),
+        ) ,
+      ),
+    );
+  }
+
+  Widget showArea(String name){
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius:BorderRadius.all(
+              Radius.circular(4.0)
+          ),
+          border: Border.all(
+              color: Colors.grey,
+              width: 1
+          )
+
+      ),
+      padding: EdgeInsets.all(20),
+      height: 200,
+      child: Text(name),
+    );
   }
 
   @override
@@ -70,10 +154,12 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+
+      body:SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -90,21 +176,19 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Container(
+              padding: EdgeInsets.all(20),
+              child:showArea(response),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
+            routerButton("readString", readString),
+            routerButton("callbackArray", callBackArray),
+            routerButton("callbackTest", callbackTest),
+            routerButton("registerTest", router1),
+            routerButton("calHandlerTest", router1),
+
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

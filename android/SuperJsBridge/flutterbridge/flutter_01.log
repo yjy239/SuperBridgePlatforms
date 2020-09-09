@@ -1,0 +1,79 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter --quiet assemble --depfile /Users/yjy/Desktop/Androidworkspace/SuperBridge_platforms/android/SuperJsBridge/flutterbridge/.android/Flutter/build/intermediates/flutter/debug/flutter_build.d --output /Users/yjy/Desktop/Androidworkspace/SuperBridge_platforms/android/SuperJsBridge/flutterbridge/.android/Flutter/build/intermediates/flutter/debug -dTargetFile=lib/main.dart -dTargetPlatform=android -dBuildMode=debug -dTrackWidgetCreation=true debug_android_application
+
+## exception
+
+FileSystemException: FileSystemException: Cannot open file, path = '/Users/yjy/Desktop/Androidworkspace/SuperBridge_platforms/android/SuperJsBridge/flutterbridge/.android/Flutter/build/intermediates/flutter/debug/.last_build_id' (OS Error: No such file or directory, errno = 2)
+
+```
+#0      _File.throwIfError (dart:io/file_impl.dart:635:7)
+#1      _File.openSync (dart:io/file_impl.dart:479:5)
+#2      _File.writeAsBytesSync (dart:io/file_impl.dart:604:31)
+#3      _File.writeAsStringSync (dart:io/file_impl.dart:628:5)
+#4      ForwardingFile.writeAsStringSync (package:file/src/forwarding/forwarding_file.dart:154:16)
+#5      ErrorHandlingFile.writeAsStringSync.<anonymous closure> (package:flutter_tools/src/base/error_handling_file_system.dart:186:22)
+#6      _runSync (package:flutter_tools/src/base/error_handling_file_system.dart:351:14)
+#7      ErrorHandlingFile.writeAsStringSync (package:flutter_tools/src/base/error_handling_file_system.dart:185:5)
+#8      FlutterBuildSystem.trackSharedBuildDirectory (package:flutter_tools/src/build_system/build_system.dart:667:23)
+#9      FlutterBuildSystem.build (package:flutter_tools/src/build_system/build_system.dart:584:5)
+<asynchronous suspension>
+#10     AssembleCommand.runCommand (package:flutter_tools/src/commands/assemble.dart:221:58)
+#11     FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:860:18)
+#12     _rootRunUnary (dart:async/zone.dart:1198:47)
+#13     _CustomZone.runUnary (dart:async/zone.dart:1100:19)
+#14     _FutureListener.handleValue (dart:async/future_impl.dart:143:18)
+#15     Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:696:45)
+#16     Future._propagateToListeners (dart:async/future_impl.dart:725:32)
+#17     Future._completeWithValue (dart:async/future_impl.dart:529:5)
+#18     Future._asyncCompleteWithValue.<anonymous closure> (dart:async/future_impl.dart:567:7)
+#19     _rootRun (dart:async/zone.dart:1190:13)
+#20     _CustomZone.run (dart:async/zone.dart:1093:19)
+#21     _CustomZone.runGuarded (dart:async/zone.dart:997:7)
+#22     _CustomZone.bindCallbackGuarded.<anonymous closure> (dart:async/zone.dart:1037:23)
+#23     _microtaskLoop (dart:async/schedule_microtask.dart:41:21)
+#24     _startMicrotaskLoop (dart:async/schedule_microtask.dart:50:5)
+#25     _runPendingImmediateCallback (dart:isolate-patch/isolate_patch.dart:118:13)
+#26     _RawReceivePortImpl._handleMessage (dart:isolate-patch/isolate_patch.dart:169:5)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 1.20.2, on Mac OS X 10.13.6 17G13035, locale zh-Hans-CN)
+    • Flutter version 1.20.2 at /Users/yjy/Library/flutter/flutter
+    • Framework revision bbfbf1770c (4 weeks ago), 2020-08-13 08:33:09 -0700
+    • Engine revision 9d5b21729f
+    • Dart version 2.9.1
+    • Pub download mirror https://pub.flutter-io.cn
+    • Flutter download mirror https://storage.flutter-io.cn
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    • Android SDK at /Users/yjy/Library/Android/sdk
+    • Platform android-29, build-tools 29.0.3
+    • ANDROID_HOME = /Users/yjy/Library/Android/sdk
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_212-release-1586-b4-5784211)
+    • All Android licenses accepted.
+
+[!] Xcode - develop for iOS and macOS (Xcode 10.1)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Xcode 10.1, Build version 10B61
+    ✗ Flutter requires a minimum Xcode version of 11.0.0.
+      Download the latest version or update via the Mac App Store.
+    • CocoaPods version 1.9.3
+
+[✓] Android Studio (version 3.6)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Flutter plugin version 48.0.1
+    • Dart plugin version 192.8052
+    • Java version OpenJDK Runtime Environment (build 1.8.0_212-release-1586-b4-5784211)
+
+[!] Connected device
+    ! No devices available
+
+! Doctor found issues in 2 categories.
+```
