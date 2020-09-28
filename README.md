@@ -175,3 +175,4 @@ In the future version ，we will not worry about this problem
                 .build();
 ```
 
+- support sync method（return method）.
