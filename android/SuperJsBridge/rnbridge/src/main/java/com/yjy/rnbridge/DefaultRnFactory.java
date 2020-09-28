@@ -41,4 +41,9 @@ public class DefaultRnFactory implements IBridgeFactory<RnReceiveFromPlatformCal
     public RnReceiveFromPlatformCallback getReceiveFromPlatformCallback() {
         return mCallback;
     }
+
+    @Override
+    public void install() {
+
+    }
 }

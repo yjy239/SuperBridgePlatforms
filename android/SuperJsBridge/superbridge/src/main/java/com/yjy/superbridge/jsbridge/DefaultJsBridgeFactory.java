@@ -47,5 +47,11 @@ public class DefaultJsBridgeFactory implements IBridgeFactory<JSReceiveFromPlatf
         return callback;
     }
 
+    @Override
+    public void install() {
+        if(webView != null){
+            webView.setClient(getBridgeClient());
+        }
+    }
 
 }

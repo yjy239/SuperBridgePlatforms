@@ -17,4 +17,5 @@ public interface IBridgeFactory<T extends ReceiveFromPlatformCallback> {
 
     T getReceiveFromPlatformCallback();
 
+    void install();
 }

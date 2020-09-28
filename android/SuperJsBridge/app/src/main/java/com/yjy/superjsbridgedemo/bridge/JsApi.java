@@ -20,9 +20,9 @@ import org.json.JSONObject;
 
 public class JsApi  {
     @BridgeMethod
-    public String testSyn(Object msg)  {
+    public String testSyn(String msg)  {
         Log.e("Type",msg.getClass().toString());
-        return msg + "［syn call］";
+        return msg + "syn call";
     }
 
 //    @BridgeMethod
@@ -35,18 +35,16 @@ public class JsApi  {
     public void testAsyn(@BridgeField(name = "msg") String msg,
                          @BridgeField(name = "object") TestObj obj, CallBackHandler<String> handler){
         Log.e("object",obj.name);
-        handler.complete(msg+" [ asyn call]");
+        handler.complete(msg+" asyn call");
     }
 
     @BridgeMethod
-    public String testNoArgSyn(Object arg) throws JSONException {
-        Log.e("Type",arg.getClass().toString());
+    public String testNoArgSyn() throws JSONException {
         return  "testNoArgSyn called [ syn call]";
     }
 
     @BridgeMethod
-    public void testNoArgAsyn(Object arg, CallBackHandler<String> handler) {
-        Log.e("Type",arg.getClass().toString());
+    public void testNoArgAsyn(CallBackHandler<String> handler) {
         handler.complete( "testNoArgAsyn   called [ asyn call]");
     }
 
@@ -54,7 +52,6 @@ public class JsApi  {
     @BridgeMethod
     //without @JavascriptInterface annotation can't be called
     public String testNever(Object arg) throws JSONException {
-        Log.e("Type",arg.getClass().toString());
         JSONObject jsonObject= (JSONObject) arg;
 
         return jsonObject.getString("msg") + "[ never call]";
@@ -62,7 +59,6 @@ public class JsApi  {
 
     @BridgeMethod
     public void callProgress(Object args, final CallBackHandler<Integer> handler) {
-        Log.e("Type",args.getClass().toString());
         new CountDownTimer(11000, 1000) {
             int i=10;
             @Override

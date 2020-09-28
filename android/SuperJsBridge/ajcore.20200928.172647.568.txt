@@ -1,7 +1,7 @@
 ---- AspectJ Properties ---
 AspectJ Compiler 1.8.1 built on Saturday Jun 21, 2014 at 00:07:06 GMT
 ---- Dump Properties ---
-Dump file: ajcore.20200909.142054.253.txt
+Dump file: ajcore.20200928.172647.568.txt
 Dump reason: org.aspectj.apache.bcel.classfile.ClassFormatException
 Dump on exception: true
 Dump at exit condition: abort
@@ -81,15 +81,15 @@ idea.executable=studio
 sun.management.compiler=HotSpot 64-Bit Tiered Compilers
 idea.paths.selector=AndroidStudio3.6
 https.proxyHost=127.0.0.1
-jnidispatch.path=/Users/yjy/Library/Caches/AndroidStudio3.6/tmp/jna377054268654012094.tmp
+jnidispatch.path=/Users/yjy/Library/Caches/AndroidStudio3.6/tmp/jna7531250692084578389.tmp
 os.name=Mac OS X
 sun.boot.class.path=/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/resources.jar:/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/rt.jar:/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/sunrsasign.jar:/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/jsse.jar:/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/jce.jar:/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/charsets.jar:/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/jfr.jar:/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/classes
 java.vm.specification.vendor=Oracle Corporation
 java.runtime.version=1.8.0_212-release-1586-b4-5784211
 jb.vmOptionsFile=/Applications/Android Studio.app/Contents/bin/studio.vmoptions,/Users/yjy/Library/Preferences/AndroidStudio3.6/studio.vmoptions
 jna.loaded=true
-io.netty.serviceThreadPrefix=Netty 
 http.proxyPort=1087
+io.netty.serviceThreadPrefix=Netty 
 user.name=yjy
 user.language.format=en
 socksProxyHost=127.0.0.1
@@ -122,7 +122,7 @@ user.country=CN
 jna.boot.library.path=
 java.home=/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre
 java.vm.info=mixed mode
-os.version=10.14.6
+os.version=10.15.6
 jdk.http.auth.tunneling.disabledSchemes=""
 https.proxyPort=1087
 path.separator=:
@@ -139,15 +139,15 @@ idea.cycle.buffer.size=1024
 awt.toolkit=sun.lwawt.macosx.LWCToolkit
 ide.new.welcome.screen.force=true
 log4j.defaultInitOverride=true
-io.netty.processId=21687
+io.netty.processId=47392
 idea.platform.prefix=AndroidStudio
 idea.dynamic.classpath=false
-user.home=/Users/yjy
 socksProxyPort=1080
+user.home=/Users/yjy
 __idea.mac.env.lock=unlocked
 java.specification.vendor=Oracle Corporation
 apple.laf.useScreenMenuBar=true
-library.jansi.path=/Applications/Android Studio.app/Contents/gradle/gradle-4.1/native/jansi/1.14/osx
+library.jansi.path=/Applications/Android Studio.app/Contents/gradle/gradle-4.1/native/jansi/1.17.1/osx
 java.library.path=/Users/yjy/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
 java.vendor.url=https://www.jetbrains.com/
 java.vm.vendor=JetBrains s.r.o
@@ -159,8 +159,8 @@ io.netty.machineId=28:f0:76:ff:fe:16:65:0e
 java.vm.specification.name=Java Virtual Machine Specification
 idea.xdebug.key=-Xdebug
 io.netty.allocator.numDirectArenas=2
-idea.popup.weight=heavy
 java.vm.specification.version=1.8
+idea.popup.weight=heavy
 sun.cpu.endian=little
 sun.os.patch.level=unknown
 java.awt.headless=true
@@ -182,7 +182,7 @@ java.vm.name=OpenJDK 64-Bit Server VM
 jdk.module.illegalAccess.silent=true
 pty4j.tmpdir=/Users/yjy/Library/Caches/AndroidStudio3.6/tmp
 file.encoding=UTF-8
-studio.record.file=/Users/yjy/Library/Caches/AndroidStudio3.6/tmp/AndroidStudio.4bca01f2-5f2c-4299-8f47-dec2702d0aee
+studio.record.file=/Users/yjy/Library/Caches/AndroidStudio3.6/tmp/AndroidStudio.7c5e38b9-6e4c-4184-93f0-e595927aeef0
 pty4j.preferred.native.folder=/Applications/Android Studio.app/Contents/lib/pty4j-native
 java.specification.version=1.8
 io.netty.allocator.numHeapArenas=2
@@ -243,7 +243,7 @@ io.netty.allocator.numHeapArenas=2
 /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar(244513 bytes)
 /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/ext/jaccess.jar(44523 bytes)
 /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/jre/lib/ext/zipfs.jar(68986 bytes)
-/System/Library/Java/Extensions/MRJToolkit.jar(12849 bytes)
+/System/Library/Java/Extensions/MRJToolkit.jar(12841 bytes)
 /Applications/Android Studio.app/Contents/gradle/gradle-4.1/caches/modules-2/files-2.1/org.aspectj/aspectjrt/1.8.1/5e7a0fa36cc24ead36d885b9d775bb31ffa8524c/aspectjrt-1.8.1.jar(116753 bytes)
 /Applications/Android Studio.app/Contents/gradle/gradle-4.1/caches/transforms-1/files-1.1/appcompat-1.0.0.aar/ab5901bf7083f8fde605b3b68326afc2/jars/classes.jar(721107 bytes)
 /Applications/Android Studio.app/Contents/gradle/gradle-4.1/caches/transforms-1/files-1.1/fragment-1.0.0.aar/093b1d2e3d5057f2a3535d048cbf6870/jars/classes.jar(166094 bytes)

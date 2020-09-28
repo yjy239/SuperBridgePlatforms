@@ -11,8 +11,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/SuperJsBridge-BridgeRegister" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/aspectjhelper" />
+            <option value="$PROJECT_DIR$/birdgecompiler" />
             <option value="$PROJECT_DIR$/converter" />
             <option value="$PROJECT_DIR$/dsbridge" />
             <option value="$PROJECT_DIR$/flutterbridge" />

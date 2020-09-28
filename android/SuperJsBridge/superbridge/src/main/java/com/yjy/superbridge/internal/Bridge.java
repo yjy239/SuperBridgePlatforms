@@ -144,9 +144,7 @@ public class Bridge {
                 core.registerObj(entry.getKey(),entry.getValue());
             }
 
-            if(webView!=null){
-                webView.setClient(client);
-            }
+            factory.install();
 
 
             return new Bridge(core);

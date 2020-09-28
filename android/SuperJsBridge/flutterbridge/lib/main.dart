@@ -58,6 +58,15 @@ class _MyHomePageState extends State<MyHomePage> {
   static const sample =
   const MethodChannel("Sample");
 
+
+
+  static const native = const MethodChannel("flutter");
+  static const def = const MethodChannel("default");
+
+  _MyHomePageState():super(){
+    native.setMethodCallHandler(platformCallHandler);
+  }
+
   void router1() {
     index++;
     setState(() {
@@ -107,6 +116,29 @@ class _MyHomePageState extends State<MyHomePage> {
     sample.invokeMethod("showToast",value);
   }
 
+  void calHandlerTest()  {
+    def.invokeMethod("calHandlerTest","test").then((value) => {
+      setState(()=>{
+        if(response != null){
+          response = value
+        }
+
+      })
+    });;
+  }
+
+  void registerTest()  {
+    def.invokeMethod("registerTest","registerTest")
+    .then((value) => {
+      setState(()=>{
+        if(response != null){
+          response = value
+        }
+
+      })
+    });
+  }
+
   Widget routerButton(String name,Function press){
     return Container(
       padding: EdgeInsets.all(10),
@@ -140,8 +172,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Future<dynamic> platformCallHandler(MethodCall call) async {
+    switch (call.method) {
+      case "callFlutter":
+        return "${call.arguments} success";
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -183,8 +224,8 @@ class _MyHomePageState extends State<MyHomePage> {
             routerButton("readString", readString),
             routerButton("callbackArray", callBackArray),
             routerButton("callbackTest", callbackTest),
-            routerButton("registerTest", router1),
-            routerButton("calHandlerTest", router1),
+            routerButton("registerTest", registerTest),
+            routerButton("calHandlerTest", calHandlerTest),
 
           ],
         ),

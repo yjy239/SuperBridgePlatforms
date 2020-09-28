@@ -346,7 +346,7 @@ public class DWebView extends WebView {
 
             @Keep
             @BridgeMethod
-            public void returnValue(final Object obj){
+            public void returnValue(final String obj){
                 runOnMainThread(new Runnable() {
                     @Override
                     public void run() {

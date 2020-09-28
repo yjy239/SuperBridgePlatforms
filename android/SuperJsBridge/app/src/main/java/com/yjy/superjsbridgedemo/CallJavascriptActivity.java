@@ -22,6 +22,7 @@ import com.yjy.dsbridge.DSBridge.OnReturnValue;
 
 public class CallJavascriptActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "B";
     DSWebView dWebView;
     private Bridge bridge;
 
@@ -33,6 +34,7 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG,"onCreate");
         setContentView(R.layout.activity_call_javascript);
         getView(R.id.addValue).setOnClickListener(this);
         getView(R.id.append).setOnClickListener(this);
@@ -51,7 +53,6 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
 
         //请注意DsBridge 为了接口统一，只暴露了统一的接口，单参数进入和回调接口
         bridge =  new Bridge.Builder()
-                .setWebView(dWebView)
                 .setClientFactory(new DefaultDsBridgeFactory(dWebView)
                         .setReceiveFromPlatformCallback(new DSReceiveFromPlatformCallback() {
                     @Override
@@ -75,8 +76,6 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
                     }
                 })
                 .build();
-
-
 
     }
 
@@ -183,4 +182,5 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
         }
 
     }
+
 }

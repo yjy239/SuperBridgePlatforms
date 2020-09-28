@@ -1,4 +1,4 @@
-package com.yjy.aspectjhelper
+package com.yjy.bridgeregister
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin

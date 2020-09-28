@@ -36,7 +36,6 @@ public class JsBridgeActivity extends AppCompatActivity {
         final BridgeWebView view = findViewById(R.id.webView);
 //
         final Bridge bridge =  new Bridge.Builder()
-                .setWebView(view)
                 .setClientFactory(new DefaultJsBridgeFactory(view)
                 .setReceiveFromPlatformCallback(new JSReceiveFromPlatformCallback() {
                     @Override

@@ -44,4 +44,11 @@ public class DefaultDsBridgeFactory implements IBridgeFactory<DSReceiveFromPlatf
     public DSReceiveFromPlatformCallback getReceiveFromPlatformCallback() {
         return callback;
     }
+
+    @Override
+    public void install() {
+        if(mDsWebView != null){
+            mDsWebView.setClient(getBridgeClient());
+        }
+    }
 }

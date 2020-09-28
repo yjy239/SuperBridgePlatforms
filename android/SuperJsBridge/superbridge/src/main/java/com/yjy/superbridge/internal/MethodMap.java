@@ -68,7 +68,11 @@ public class MethodMap {
 
     }
 
-    public void put(String name,BridgeHandler method){
+    public Map<String, BridgeHandler> getHandlerMap() {
+        return handlerMap;
+    }
+
+    public void put(String name, BridgeHandler method){
 
         handlerMap.put(name, method);
     }
@@ -147,8 +151,8 @@ public class MethodMap {
         Log.e("args",args);
 
         Object object = mNamespaceInterfaces.get(nameSlits[0]);
-        if(object == null){
-            throw new IllegalArgumentException("not register namespace");
+        if(object == null&&"".equals(nameSlits[0])){
+            object = mNamespaceInterfaces.get("default");
         }
 
 
@@ -163,6 +167,10 @@ public class MethodMap {
            BridgeHandler bridge = handlerMap.get(method);
            if(bridge != null){
                bridge.handler(args,handler);
+           }else{
+               if(object == null){
+                   throw new IllegalArgumentException("not register namespace");
+               }
            }
 
            return null;
@@ -284,6 +292,7 @@ public class MethodMap {
 
                 Annotation[][] annotations = method.getParameterAnnotations();
                 Type[] types = method.getGenericParameterTypes();
+                Class[] clazz = method.getParameterTypes();
 
                 ArrayList<String> methodParameterNames = new ArrayList<String>(types.length);
                 for (int i = 0; i < annotations.length; i++) {
@@ -299,7 +308,7 @@ public class MethodMap {
                 }
 
                 boolean isAsync = types[types.length-1] == CallBackHandler.class
-                        ||CallBackHandler.class.isAssignableFrom((Class<?>) types[types.length-1]);
+                        ||CallBackHandler.class.isAssignableFrom((Class<?>) clazz[clazz.length-1]);
 
                 //根据类型转换数据到数组
                 Object[] params = new Object[types.length];

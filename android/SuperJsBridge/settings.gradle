@@ -1,5 +1,5 @@
 
-include ':app', ':superbridge', ':aspectjhelper'
+include ':app', ':superbridge', ':SuperJsBridge-BridgeRegister'
 setBinding(new Binding([gradle: this]))
 evaluate(new File(
   settingsDir,
@@ -9,3 +9,4 @@ include ':dsbridge'
 include ':converter'
 include ':rnbridge'
 include ':flutterbridge'
+include ':birdgecompiler'
